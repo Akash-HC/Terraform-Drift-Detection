@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    environment {
+        AWS_DEFAULT_REGION = 'us-east-1'  // Set your AWS region
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Assuming the Terraform code is in a git repository
+                git url: 'https://github.com/Akash-HC/Terraform-Drift-Detection', branch: 'main'
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Terraform-drift-detection']]) {
+                        // Initialize Terraform
+                        sh 'terraform init'
+                    }
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Terraform-drift-detection']]) {
+                    // Apply the detected changes (drift correction)
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+    }
+}
+
