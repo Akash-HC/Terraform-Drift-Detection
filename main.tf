@@ -1,7 +1,13 @@
 provider "aws" {
   region = "us-east-1"
 }
-
+terraform {
+  backend "s3" {
+    bucket = "terraform-backend-practice-bucket1"
+    key    = "Project/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
 resource "aws_instance" "Project" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [ "sg-0315170f9b2efb5a0" ]
