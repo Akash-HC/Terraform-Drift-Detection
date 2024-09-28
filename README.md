@@ -1,0 +1,2 @@
+## Overview Of The Project
+This project implements a local solution for detecting drift in Terraform-managed infrastructure. Initially, an already deployed infrastructre in AWS will be migrated to Terraform for further deployment and maintenance. The drift detection is accomplished by running Terraform commands on a scheduled basis using a Python script. If drift is detected, the script triggers a Jenkins pipeline for further processing.
