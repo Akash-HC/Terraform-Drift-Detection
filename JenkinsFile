@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Assuming the Terraform code is in a git repository
-                git url: 'https://github.com/Akash-HC/Terraform-Drift-Detection', branch: 'main'
+                // checkout the Terraform code in git repository
+                git url: 'https://github.com/Akash-HC/TerraformProject-Migration-DriftDetection', branch: 'main'
             }
         }
         stage('Terraform Init') {
