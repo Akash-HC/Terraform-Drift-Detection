@@ -136,6 +136,10 @@ def check_terraform_drift():
             return False
         elif exit_code == 2:
             logging.info("Drift detected.")
+            email_notify = subprocess.run(['python3', 'send_email.py'])
+            logging.info(f"Email sent successfully: {email_notify.stdout}")
+            logging.error(f"Email error: {email_notify.stderr}") # notifying the user about the drift
+            return True
             return True
         else:
             logging.error(f"Terraform plan failed with exit code {exit_code}.")
