@@ -23,7 +23,8 @@
 The Python script is the core of the drift detection system. It performs the following tasks:
 * Executes terraform plan to compare the live AWS infrastructure with the desired configuration.
 * Parses the Terraform output to determine if there is any drift.
-* If drift is detected, it sends a request to the Jenkins server to trigger the terraform apply pipeline for remediation.
+* If drift is detected, it sends a request to the Jenkins server to trigger the terraform apply pipeline for remediation. Also it will   
+  trigger another python program which sends email notification to the recipients.
 * Logs all outputs and actions for tracking and debugging purposes.
 ## 3. Jenkins Pipeline
 * Jenkins is configured to automatically apply infrastructure fixes if drift is detected.
@@ -42,8 +43,6 @@ The Python script is the core of the drift detection system. It performs the fol
 * The solution is modular and can be easily extended to other environments or enhanced with additional features, such as real-time Slack notifications or integration with monitoring tools like Prometheus and Grafana.
 
 # Future Enhancements
-## Notification System: 
-* Add Slack or email notifications to alert team members when drift is detected and remediation is triggered.
 ## Monitoring: 
 * Integrate monitoring tools such as Prometheus and Grafana for real-time visualization of drift detection metrics.
 ## Multi-Environment Support: 
